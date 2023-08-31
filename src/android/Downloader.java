@@ -65,7 +65,7 @@ public class Downloader extends CordovaPlugin {
       downloadReceiverCallbackContext = callbackContext;
 
       if(action.equals("download")){
-          if(cordova.hasPermission(WRITE_EXTERNAL_STORAGE) || Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+          if(cordova.hasPermission(WRITE_EXTERNAL_STORAGE) || Build.VERSION.SDK_INT >= 33){
               download(args.getJSONObject(0), callbackContext);
           }
           else {
