@@ -1,5 +1,5 @@
 package hr.integrator.cordova.plugins.downloader;
-
+import static android.content.Context.RECEIVER_EXPORTED;
 import android.content.Context;
 import android.content.pm.LauncherApps;
 import android.database.Cursor;
@@ -86,7 +86,11 @@ public class Downloader extends CordovaPlugin {
 
     IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
 
-    webView.getContext().registerReceiver(downloadReceiver, intentFilter);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        webView.getContext().registerReceiver(downloadReceiver, intentFilter,RECEIVER_EXPORTED);
+    }else {
+        webView.getContext().registerReceiver(downloadReceiver, intentFilter);
+    }
 
     this.downloadId = downloadManager.enqueue(request);
       
