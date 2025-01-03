@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import android.os.Build;
 import android.os.Environment;
-
+import static android.content.Context.RECEIVER_EXPORTED;
 public class Downloader extends CordovaPlugin {
 	
   private static final String LOG_TAG = "Downloader";
