@@ -86,8 +86,13 @@ public class Downloader extends CordovaPlugin {
 
     IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
 
-    webView.getContext().registerReceiver(downloadReceiver, intentFilter);
-
+    //webView.getContext().registerReceiver(downloadReceiver, intentFilter);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+       webView.getContext().registerReceiver(downloadReceiver, intentFilter,RECEIVER_EXPORTED);
+    }else {
+       webView.getContext().registerReceiver(downloadReceiver, intentFilter);
+    }
+	  
     this.downloadId = downloadManager.enqueue(request);
       
     // Don't return any result now, since status results will be sent when events come in from broadcast receiver
