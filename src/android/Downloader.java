@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import android.os.Build;
 import android.os.Environment;
-import static android.content.Context.RECEIVER_EXPORTED;
 public class Downloader extends CordovaPlugin {
 	
   private static final String LOG_TAG = "Downloader";
@@ -86,12 +85,7 @@ public class Downloader extends CordovaPlugin {
 
     IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
 
-    //webView.getContext().registerReceiver(downloadReceiver, intentFilter);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-       webView.getContext().registerReceiver(downloadReceiver, intentFilter,RECEIVER_EXPORTED);
-    }else {
-       webView.getContext().registerReceiver(downloadReceiver, intentFilter);
-    }
+    webView.getContext().registerReceiver(downloadReceiver, intentFilter);
 	  
     this.downloadId = downloadManager.enqueue(request);
       
